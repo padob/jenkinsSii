@@ -1,0 +1,45 @@
+properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10')),
+parameters([booleanParam(defaultValue: true, description: '', name: 'deploy_and_restart')]), pipelineTriggers([])])
+pipeline {
+
+    agent any
+    tools {
+        maven 'maven-3.3.3-se'
+        jdk 'java8'
+    }
+    stages {
+        stage('Git'){
+            steps {
+                git branch: 'master', url: 'ssh://git@git.sabre.com/se_tools/repviewer.git'
+            }
+        }
+
+        stage ('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+            post {
+                success {
+                    archive 'target/*.war'
+                    junit 'target/surefire-reports/**/*.xml'
+                }
+            }
+        }
+
+        stage ('Deploy') {
+            when {
+                expression { params.deploy_and_restart }
+            }
+            steps {
+                echo "Deploy last stable repviewer.war"
+                dir('/data/se/repviewer/') {
+                    sh 'export BUILD_ID=REPVIEVER; /data/se/repviewer/repviewer.sh stop'
+                }
+                sh 'cp target/*.war /data/se/repviewer/'
+                dir('/data/se/repviewer/') {
+                    sh 'export BUILD_ID=REPVIEVER; /data/se/repviewer/repviewer.sh start &'
+                }
+            }
+        }
+    }
+}

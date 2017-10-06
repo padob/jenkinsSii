@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+
+    stages {
+         stage('servers.json') {
+            when {
+                expression { params.update_servers_json_file }
+            }
+            steps {
+                git branch: 'master', url: 'ssh://git@git.sabre.com/ssw_tools/depinfo.git'
+                echo "Copy servers.json"
+                sh 'cp prod/servers.json /data/se/depinfo/servers.json'
+            }
+         }
+
+        stage('Deploy') {
+            when {
+                expression { params.deploy_last_stable_version }
+            }
+            steps {
+                echo "Deploy last stable depinfo.war"
+                step ([$class: 'CopyArtifact',
+                        projectName: 'Dashboard-Build',
+                        filter: '*/target/depinfo.war',
+                        fingerprintArtifacts: false,
+                        target: '/data/se/depinfo/',
+                        flatten: true,
+                        selector: [$class: 'SpecificBuildSelector', buildNumber: 'lastStableBuild']
+                ]);
+            }
+        }
+
+        stage('Restart') {
+            when {
+                expression { params.restart }
+            }
+            steps {
+                echo "Restart ..."
+                dir('/data/se/depinfo/') {
+                    sh 'export BUILD_ID=DEPINFO; /data/se/depinfo/depinfo.sh stop'
+                    sh 'export BUILD_ID=DEPINFO; /data/se/depinfo/depinfo.sh start &'
+                }
+            }
+        }
+    }
+}

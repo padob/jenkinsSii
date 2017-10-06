@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+    tools {
+        maven 'maven-3.3.3-se'
+        jdk 'java8'
+    }
+    stages {
+        stage('Git'){
+            steps {
+                git branch: 'master', url: 'ssh://git@git.sabre.com/ssw_tools/depinfo.git'
+            }
+        }
+
+        stage ('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+            post {
+                success {
+                    archive '*/target/*.war'
+                    junit '*/target/surefire-reports/**/*.xml'
+                }
+            }
+        }
+    }
+}
