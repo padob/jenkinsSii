@@ -1,3 +1,18 @@
+properties([parameters([string(name: 'TEST', defaultValue: 'test_a')])])
 node {
-    echo "Hello Sii people"
+    stage('First stage') {
+        echo "Hello Sii people"
+    }
+    stage('Environment') {
+        echo env.PATH
+        echo env.BUILD_ID
+        echo env.JOB_URL
+        //
+    }
+    stage('Params') {
+        echo params.TEST
+    }
+    stage('currentBuild') {
+        echo currentBuild.displayName
+    }
 }
