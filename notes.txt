@@ -1,0 +1,7 @@
+przykładowy plik services.sh
+stawianie jenkinsa via ssh
+
+https://jenkins.io/doc/book/pipeline/jenkinsfile/
+https://jenkins.io/doc/pipeline/examples
+
+REST_Api:
