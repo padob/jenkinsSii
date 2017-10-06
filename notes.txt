@@ -4,4 +4,7 @@ stawianie jenkinsa via ssh
 https://jenkins.io/doc/book/pipeline/jenkinsfile/
 https://jenkins.io/doc/pipeline/examples
 
+Zacząć od
+
+
 REST_Api:
