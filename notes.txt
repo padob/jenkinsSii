@@ -1,6 +1,8 @@
 przykładowy plik services.sh
 stawianie jenkinsa via ssh
 
+https://HOST:PORT/pipeline-syntax/globals#env
+
 https://jenkins.io/doc/book/pipeline/jenkinsfile/
 https://jenkins.io/doc/pipeline/examples
 
