@@ -8,10 +8,6 @@ fi
 
 command=$1
 
-
-
-
-
 printUsage() {
     echo "Usage:"
     echo "create_workshop.sh create <user_prefix> <user_counts> <user_group>"
@@ -83,9 +79,7 @@ startAllJenkins() {
     userCount=$2
     for i in $(seq 1 $userCount)
     do
-        userName=$userPrefix$i
-        jenkinsHome="/home/"$userName"/jenkins_home"
-        su -c "$jenkinsHome/jenkins.sh &" $userName
+        startJenkins $userPrefix $i
     done
 }
 
@@ -94,12 +88,7 @@ stopAllJenkins() {
     userCount=$2
     for i in $(seq 1 $userCount)
     do
-        userName=$userPrefix$i
-        jenkinsHome="/home/"$userName"/jenkins_home"
-
-        jenkinsPID=$(ps aux | grep java | grep $jenkinsHome | awk '{print $2}')
-        echo "kill jenkins process PID: "$jenkinsPID
-        kill -9 $jenkinsPID 2>&1 > /dev/null
+        stopJenkins $userPrefix $i
     done
 }
 
@@ -109,7 +98,7 @@ startJenkins() {
 
     userName=$userPrefix$userNumber
     jenkinsHome="/home/"$userName"/jenkins_home"
-    su -c "$jenkinsHome/jenkins.sh &" $userName
+    su -c "$jenkinsHome/jenkins.sh start&" $userName
 }
 
 stopJenkins() {
@@ -119,9 +108,9 @@ stopJenkins() {
     userName=$userPrefix$userNumber
     jenkinsHome="/home/"$userName"/jenkins_home"
 
-    jenkinsPID=$(ps aux | grep java | grep $jenkinsHome | awk '{print $2}')
-    echo "kill jenkins process PID: "$jenkinsPID
-    kill -9 $jenkinsPID 2>&1 > /dev/null
+    userName=$userPrefix$userNumber
+    jenkinsHome="/home/"$userName"/jenkins_home"
+    su -c "$jenkinsHome/jenkins.sh stop&" $userName
 }
 
 case $command in
