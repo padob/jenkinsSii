@@ -54,6 +54,18 @@ createWorkshop() {
 
         mkdir -p $jenkinsSlave
         chown -R $userName:$groupName $jenkinsHome
+        chown -R $userName:$groupName $jenkinsSlave
+    done
+
+    for i in $(seq 1 $userCount)
+    do
+        userName=$userPrefix$i
+        userWork="/home/"$userName"/work"
+        mkdir -p $userWork
+        cd $userWork
+        git clone https://github.com/klimas7/Learn.git
+
+        chown -R $userName:$groupName $userWork
     done
 }
 
