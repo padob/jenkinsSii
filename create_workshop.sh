@@ -36,6 +36,17 @@ createWorkshop() {
         useradd $userName -g $groupName -m -n
         echo $userName:$userPass | chpasswd
     done
+
+    for i in $(seq 1 $userCount)
+    do
+        userName=$userPrefix$i
+        jenkinsHome="/home/"$userName"/jenkins_home"
+        mkdir -p $jenkinsHome
+        cp tools/jenkins.war $jenkinsHome/jenkin.war
+
+
+        chown -R $userName:$groupName $jenkinsHome
+    done
 }
 
 cleanWorkshop() {
