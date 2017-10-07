@@ -14,8 +14,12 @@ command=$1
 
 printUsage() {
     echo "Usage:"
-    echo "create_workshop.sh create <user_prefix> <user_number> <user_group>"
-    echo "create_workshop.sh clean <user_prefix> <user_number> <user_group>"
+    echo "create_workshop.sh create <user_prefix> <user_counts> <user_group>"
+    echo "create_workshop.sh clean <user_prefix> <user_counts> <user_group>"
+    echo "create_workshop.sh startAllJenkins <user_prefix> <user_counts>"
+    echo "create_workshop.sh stopAllJenkins <user_prefix> <user_counts>"
+    echo "create_workshop.sh startJenkins <user_prefix> <user_number>"
+    echo "create_workshop.sh stopJenkins <user_prefix> <user_number>"
 }
 
 createWorkshop() {
@@ -41,10 +45,18 @@ createWorkshop() {
     do
         userName=$userPrefix$i
         jenkinsHome="/home/"$userName"/jenkins_home"
+        jenkinsSlave="/home/"$userName"/jenkins_slave"
+        jenkinsPort="818"$i
+
         mkdir -p $jenkinsHome
-        cp tools/jenkins.war $jenkinsHome/jenkin.war
+        cp tools/jenkins.war $jenkinsHome/jenkins.war
 
+        cp jenkins.sh $jenkinsHome/jenkins.sh
+        sed -i 's#@JENKINS_HOME@#'$jenkinsHome'#g' $jenkinsHome/jenkins.sh
+        sed -i 's/@JENKINS_PORT@/'$jenkinsPort'/g' $jenkinsHome/jenkins.sh
+        chmod +x $jenkinsHome/jenkins.sh
 
+        mkdir -p $jenkinsSlave
         chown -R $userName:$groupName $jenkinsHome
     done
 }
@@ -66,6 +78,52 @@ cleanWorkshop() {
     groupdel $groupName
 }
 
+startAllJenkins() {
+    userPrefix=$1
+    userCount=$2
+    for i in $(seq 1 $userCount)
+    do
+        userName=$userPrefix$i
+        jenkinsHome="/home/"$userName"/jenkins_home"
+        su -c "$jenkinsHome/jenkins.sh &" $userName
+    done
+}
+
+stopAllJenkins() {
+    userPrefix=$1
+    userCount=$2
+    for i in $(seq 1 $userCount)
+    do
+        userName=$userPrefix$i
+        jenkinsHome="/home/"$userName"/jenkins_home"
+
+        jenkinsPID=$(ps aux | grep java | grep $jenkinsHome | awk '{print $2}')
+        echo "kill jenkins process PID: "$jenkinsPID
+        kill -9 $jenkinsPID 2>&1 > /dev/null
+    done
+}
+
+startJenkins() {
+    userPrefix=$1
+    userNumber=$2
+
+    userName=$userPrefix$userNumber
+    jenkinsHome="/home/"$userName"/jenkins_home"
+    su -c "$jenkinsHome/jenkins.sh &" $userName
+}
+
+stopJenkins() {
+    userPrefix=$1
+    userNumber=$2
+
+    userName=$userPrefix$userNumber
+    jenkinsHome="/home/"$userName"/jenkins_home"
+
+    jenkinsPID=$(ps aux | grep java | grep $jenkinsHome | awk '{print $2}')
+    echo "kill jenkins process PID: "$jenkinsPID
+    kill -9 $jenkinsPID 2>&1 > /dev/null
+}
+
 case $command in
     "create")
         echo "Create workshop"
@@ -84,6 +142,42 @@ case $command in
             exit
         fi
         cleanWorkshop $2 $3 $4
+        ;;
+    "startAllJenkins")
+        echo "Start All Jenkins"
+        if [ $# -ne 3 ]; then
+            echo "Illegal arguments"
+            printUsage
+            exit
+        fi
+        startAllJenkins $2 $3
+        ;;
+     "stopAllJenkins")
+        echo "Stop All Jenkins"
+        if [ $# -ne 3 ]; then
+            echo "Illegal arguments"
+            printUsage
+            exit
+        fi
+        stopAllJenkins $2 $3
+        ;;
+     "startJenkins")
+        echo "Start Jenkins"
+        if [ $# -ne 3 ]; then
+            echo "Illegal arguments"
+            printUsage
+            exit
+        fi
+        startJenkins $2 $3
+        ;;
+     "stopJenkins")
+        echo "Stop Jenkins"
+        if [ $# -ne 3 ]; then
+            echo "Illegal arguments"
+            printUsage
+            exit
+        fi
+        stopJenkins $2 $3
         ;;
     *)
         printUsage
