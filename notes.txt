@@ -6,6 +6,9 @@ https://HOST:PORT/pipeline-syntax/globals#env
 https://jenkins.io/doc/book/pipeline/jenkinsfile/
 https://jenkins.io/doc/pipeline/examples
 
+https://wiki.jenkins.io/display/JENKINS/Plugin+tutorial
+
+
 Zacząć od
 
 
