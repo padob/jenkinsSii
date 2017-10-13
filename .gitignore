@@ -1,2 +1,8 @@
 .idea
 
+*.aux
+*.log
+*.nav
+*.out
+*.toc
+*.snm

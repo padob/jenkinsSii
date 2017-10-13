@@ -1,0 +1,159 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeSii}[2016/04/15 Sii beamer theme]
+\RequirePackage[scaled=.85]{helvet}
+
+\newcommand{\headertext}{}
+
+\newcommand{\addresstext}{}
+
+\def\backgroundfile{tlo}
+
+\newlength{\@headerdist}
+\setlength{\@headerdist}{1mm}
+
+\newenvironment{packed_enum}{
+\begin{itemize}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{itemize}}
+
+\ProcessOptions
+
+\usepackage[polish]{babel}
+\RequirePackage[latin2]{inputenc}
+\selectlanguage{polish} 
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage[normalem]{ulem}
+
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  showstringspaces=false,
+  commentstyle=\color{gray}\upshape
+}
+
+\definecolor{maroon}{rgb}{0.5,0,0}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\lstdefinelanguage{XML}
+{
+  basicstyle=\ttfamily\tiny,
+  morestring=[s]{"}{"},
+  morecomment=[s]{?}{?},
+  morecomment=[s]{!--}{--},
+  commentstyle=\color{darkgreen},
+  moredelim=[s][\color{black}]{>}{<},
+  moredelim=[s][\color{red}]{\ }{=},
+  stringstyle=\color{blue},
+  identifierstyle=\color{maroon}
+}
+
+\mode<presentation>
+
+%\useinnertheme{rectangles}
+\definecolor{mydarkblue}{RGB}{31,104,176}
+\definecolor{mylightblue}{RGB}{126,177,224}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+% \setbeamertemplate{blocks}[rounded][shadow=false]
+% \addtobeamertemplate{block begin}{\pgfsetfillopacity{0.8}}{\pgfsetfillopacity{1}}
+% \setbeamercolor{structure}{fg=mygreen}
+\setbeamercolor*{block title}{fg=black, bg= mydarkblue}
+\setbeamercolor*{block body}{fg= white, bg= mylightblue}
+
+
+
+\setbeamerfont{author}{size=\large}
+\setbeamerfont{date}{size=\large}
+\setbeamerfont{example text}{series=\bfseries}
+\setbeamerfont{section}{series=\bfseries}
+\setbeamercolor{structure}{fg=black}
+\setbeamercolor{title}{fg=black}
+\setbeamerfont{title}{series=\bfseries}
+
+% disable navigation symbols (who uses these anyway?)
+\setbeamertemplate{navigation symbols}{}
+
+% frame
+\setbeamercolor{frametitle}{fg=black}
+\setbeamerfont{frametitle}{series=\mdseries,size=\large}
+\setbeamerfont{framesubtitle}{series=\mdseries,size=\large}
+\setbeamertemplate{frametitle}
+{
+  \ifbeamer@plainframe
+  \else
+    \textbf{\insertframetitle}
+    %\vspace{.25cm}
+  \fi
+}
+
+% headline
+\setbeamercolor{headline}{fg=white}
+\setbeamertemplate{headline}{
+  \ifbeamer@plainframe
+  \else
+        \vspace{8mm}
+        \leavevmode\tiny%
+        \hspace*{9.15cm}
+    \normalsize
+  \fi
+}
+
+% title page with ZBH image
+\setbeamertemplate{title page}{
+  \vspace{\@headerdist}
+  \vspace{5mm}
+  \textbf{\LARGE{\inserttitle}}
+  %\vspace{3mm}
+%  \begin{center}
+%   \normalsize{\insertsubtitle}
+%  \end{center}
+  \vfill
+  \begin{columns}
+  \begin{column}{.30\textwidth}
+    \centerline{
+      \pgfimage[height=1.5cm]{sii_logo}}
+  \end{column}
+  \begin{column}{.50\textwidth}
+    \centerline{
+   %   \pgfimage[height=2.0cm]{Pivotal_Java_Spring_Logo.png}
+}
+  \end{column}
+  \begin{column}{.30\textwidth}
+    \centerline{
+      \pgfimage[height=2.5cm]{jenkins_logo}
+   }
+  \end{column}
+  \end{columns}
+  \vspace{8mm}
+  \textbf{\large{\insertauthor}}\\
+  Starszy In¿ynier ds. oprogramowania
+  \normalsize
+}
+
+% footer with name, date and page numbers
+\setbeamercolor{footline}{fg=gray}
+\setbeamertemplate{footline}{
+  \ifbeamer@plainframe
+  \else
+    \leavevmode\tiny%
+    \hspace*{3.3cm}%
+    \makebox[4cm][l]{\insertauthor}%
+    \makebox[4cm][l]{\insertdate}%
+      \hfill\insertframenumber/\inserttotalframenumber\hspace{5mm}%
+    \vspace{3mm}%
+  \fi
+}
+
+% use ZBH slide layout template as background image
+\setbeamertemplate{background} {
+  \ifbeamer@plainframe
+  \else
+    \includegraphics[width=\paperwidth,height=\paperheight]{\backgroundfile}
+  \fi
+}
+
+\mode
+<all>
+
