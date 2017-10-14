@@ -3,7 +3,7 @@
 #Check is run script with root
 if [ $EUID != 0 ]; then
     echo "Please run as root"
-    exit
+    exit 1
 fi
 
 command=$1
