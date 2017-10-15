@@ -1,0 +1,27 @@
+properties([pipelineTriggers([pollSCM('')])])
+pipeline {
+    agent any
+    tools {
+        jdk 'java8'
+        maven 'maven'
+    }
+    stages {
+        stage('Git') {
+            steps {
+                git url: 'https://github.com/klimas7/Learn.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn -Dmaven.test.failure.ignore=true clean install'
+            }
+            post {
+                success {
+                    archive 'target/*.jar'
+                    junit 'target/surefire-reports/*.xml'
+                    step([$class: 'Publisher', reportFilenamePattern: '**/testng-results.xml'])
+                }
+            }
+        }
+    }
+}
