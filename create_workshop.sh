@@ -3,7 +3,7 @@
 #Check is run script with root
 if [ $EUID != 0 ]; then
     echo "Please run as root"
-    exit
+    exit 1
 fi
 
 command=$1
@@ -131,7 +131,7 @@ case $command in
         if [ $# -ne 4 ]; then
             echo "Illegal arguments"
             printUsage
-            exit
+            exit 1
         fi
         createWorkshop $2 $3 $4
         ;;
@@ -140,7 +140,7 @@ case $command in
         if [ $# -ne 4 ]; then
             echo "Illegal arguments"
             printUsage
-            exit
+            exit 1
         fi
         cleanWorkshop $2 $3 $4
         ;;
@@ -149,7 +149,7 @@ case $command in
         if [ $# -ne 3 ]; then
             echo "Illegal arguments"
             printUsage
-            exit
+            exit 1
         fi
         startAllJenkins $2 $3
         ;;
@@ -158,7 +158,7 @@ case $command in
         if [ $# -ne 3 ]; then
             echo "Illegal arguments"
             printUsage
-            exit
+            exit 1
         fi
         stopAllJenkins $2 $3
         ;;
@@ -167,7 +167,7 @@ case $command in
         if [ $# -ne 3 ]; then
             echo "Illegal arguments"
             printUsage
-            exit
+            exit 1
         fi
         startJenkins $2 $3
         ;;
@@ -176,7 +176,7 @@ case $command in
         if [ $# -ne 3 ]; then
             echo "Illegal arguments"
             printUsage
-            exit
+            exit 1
         fi
         stopJenkins $2 $3
         ;;
