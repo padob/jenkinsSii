@@ -1,0 +1,98 @@
+Logowanie na root'a 
+$ su -
+password:12345678
+--------------------------
+
+uzytkownik: jenkins
+password: 12345678
+--------------------------
+
+Instalacja pakietu XYZ
+
+# dnf install XYZ
+--------------------------------
+
+Narzędzia w /opt/tools
+--------------------------------
+
+Źródła do wykorzystania w /work
+--------------------------------
+
+Uruchomienie z wara
+$ cd /opt/tools/jenkins_war
+$ java -jar jekins.war
+
+Na koniec usunąć katalog domowy
+$ rm -rf /home/jenkins/.jenkins
+--------------------------------
+
+Instalacja
+# dnf install jenkins
+# systemctl status jenkins.service 
+# systemctl enable jenkins.service
+# systemctl start jenkins.service
+
+
+----------------------------------------------
+Repozytorium konfiguracji                 [01]
+$ mkdir /work/jenkins/config_repo
+$ git init --bare
+
+url: file:///work/jenkins/config_repo
+
+
+==============================================
+Slave
+$ mkdir /work/jenkins_slaves 
+$ mkdir /work/jenkins_slaves/slave_1
+$ mkdir /work/jenkins_slaves/slave_2
+
+użyć konta root'a
+
+
+=============================================
+Jenkins jobs                    [05,06,07,10]
+
+$ cd /work/Learn
+$ vim post-commit 
+
+#!/bin/bash
+curl http://127.0.0.1:8080/git/notifyCommit?url=file:///work/Learn
+
+$ chmod +x post-commit
+
+
+Jenkins views                            [08]
+
+Jenkins dashboard                        [09]
+
+=============================================
+Calculator groovy                        [02]
+
+/work/Grooy-script
+
+Calculator plugin
+
+/work/calculator-plugin
+
+IntelliJ 
+$ cd /opt/tools/intellij/bin/
+$ ./idea.sh
+=============================================
+Pluginy do zainstalowania
+[01] SCM Sync Configuration Plugin
+[02] Validating String Parameter Plugin
+[03] Scriptler
+[04] Groovy
+[05] Maven Integration plugin
+[06] TestNG Results Plugin
+[07] Pipeline
+[08] Build Pipeline Plugin
+[09] Build Monitor View
+[10] Git plugin
+
+
+mvn archetype:generate
+
+747: remote -> io.jenkins.archetypes:empty-plugin (Skeleton of a Jenkins plugin with a POM and an empty source tree.)
+748: remote -> io.jenkins.archetypes:hello-world-plugin (Skeleton of a Jenkins plugin with a POM and an example build step.)
