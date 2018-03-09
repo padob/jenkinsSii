@@ -32,10 +32,14 @@ Instalacja
 # systemctl enable jenkins.service
 # systemctl start jenkins.service
 
+JENKINS_HOME=/var/lib/jenkins
+logfile=/var/log/jenkins/jenkins.log
+/usr/share/jenkins
 
 ----------------------------------------------
 Repozytorium konfiguracji                 [01]
 $ mkdir /work/jenkins/config_repo
+$ cd /work/jenkins/config_repo/
 $ git init --bare
 
 url: file:///work/jenkins/config_repo

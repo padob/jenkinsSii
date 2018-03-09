@@ -1,0 +1,57 @@
+1   Prezentacja
+2   Instalacja via dnf
+2.1 Uruchomienie servisu
+    # dnf install jenkins
+    # systemctl status jenkins.service
+    # systemctl enable jenkins.service
+    # systemctl start jenkins.service
+
+    JENKINS_HOME=/var/lib/jenkins
+    logfile=/var/log/jenkins/jenkins.log
+    /usr/share/jenkins
+2.2 Usunięcie
+    # systemctl stop jenkins.service
+    # dnf remove jenkins
+
+3   Uruchomie via java -jar jenkins.war
+3.1 Jenkins home
+    rm -rf ~/.jenkins
+
+4   Uruchomienie ze skryptu
+4.1 ./jenkins.sh start
+4.2 Inicjalizacja i domyślne pluginy
+4.3 Omówić katalogi
+4.4 Zarządzaj Jenkinsem
+4.4.1 	Zarządzanie starymi danymi
+4.4.2   Informacje o Jenkinsie
+4.4.3   Informacje o systemie !! Zrzut wątków
+4.4.3   Odczyt statystyk: Zrobić kilka jobów (4 test A) ze schedulerami [Load Statistics]
+4.4.5   System Log
+        Plugin
+        Poziomy logowania
+        Nowy logger
+
+4.5 Odczytaj ponownie konfigurację z dysku
+        Zmienić liczbę executorów plik config.xml
+
+4.6 Zarządzaj wtyczkami
+
+4.7 Konfiguracja historia i synchroniacja
+    - Job Configuration History
+    - SCM Sync Configuration
+        -- $ mkdir /work/jenkins/config_repo
+           $ cd /work/jenkins/config_repo/
+           $ git init --bare
+
+           url: file:///work/jenkins/config_repo
+
+    -- ThinBackup
+
+
+4.8 Quiet period - wyjaśnić na przykładzie dwóch jobów parent i child
+4.9 SCM checkout retry count - wyjaśnić na podstawie fake repo
+
+5   Konfiguruj ustawienia bezpieczeństwa
+
+Unix user/group database
+
