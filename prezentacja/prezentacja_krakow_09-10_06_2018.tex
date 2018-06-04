@@ -1,0 +1,194 @@
+\documentclass[aspectratio=1609]{beamer}
+\usetheme{Sii}
+
+\author{Bogus³aw Klimas}
+\title{Jenkins - Continuous Integration i nie tylko}
+\date{09-10 czerwiec 2018}
+
+%\setbeameroption{show notes}
+%\setbeamercolor{note page}{bg=white}
+
+\begin{document}
+
+% ===================================================== %
+% Strona tytu³owa                                       %
+% ===================================================== %
+\begin{frame}
+\titlepage
+\end{frame}
+
+% ===================================================== %
+% Agenda                                                %
+% ===================================================== %
+\begin{frame}
+\frametitle{Agenda}
+\tableofcontents
+\end{frame}
+
+% ===================================================== %
+% O nas                                                 %
+% ===================================================== %
+\section{O nas}
+\begin{frame}\frametitle{O nas}
+\begin{block}{O mnie}
+ Programuje w Javie od 9 lat\\
+ Jenkinsem zajmuje siê od $\sim7$ lat\\
+ Sygnity, Sii (Sabre)\\
+ Opiekun plugina git-parameter\footnote{https://github.com/jenkinsci/git-parameter-plugin}
+\end{block}
+\begin{block}{O Was}
+    Ka¿dy po kilka s³ów
+\end{block}
+\end{frame}
+
+% ===================================================== %
+% Jenkins a co to                                       %
+% ===================================================== %
+\section{Jenkins a co to?}
+\begin{frame}\frametitle{Jenkins a co to\footnote{https://jenkins.io/press/}}
+\begin{block}{Elevator Pitch}
+ Jenkins is an open source automation server which enables developers around the world to reliably build, test, and deploy their software.
+\end{block}
+\begin{block}{Blurb}
+ Jenkins, originally founded in 2006 as "Hudson", is one of the leading automation servers available. 
+ Using an extensible, plugin-based architecture developers have created hundreds of plugins to adapt Jenkins to a multitude of build, test, and deployment automation workloads. 
+ In 2015, Jenkins surpassed 100,000 known installations making it the most widely deployed automation server.
+\end{block}
+\end{frame}
+
+% ===================================================== %
+% Jenkins kto za tym wszystkim stoi                     %
+% ===================================================== %
+\begin{frame}\frametitle{Jenkins kto za tym wszystkim stoi}
+\begin{columns}
+ \begin{column}{.30\textwidth}
+  \begin{block}{Kohsuke Kawaguchi}
+   \pgfimage[height=3.0cm]{kk}
+  \end{block}
+ \end{column}
+ \begin{column}{.70\textwidth}
+  \begin{block}{Links}
+   \footnotesize
+   \begin{itemize}
+    \item https://jenkins.io
+    \item https://groups.google.com/forum/\#!forum/jenkinsci-dev
+    \item https://issues.jenkins-ci.org/
+    \item https://wiki.jenkins-ci.org/display/JENKINS/Home
+   \end{itemize}
+  \end{block}
+   \pgfimage[height=2.5cm]{CloudBees}
+ \end{column}
+\end{columns}
+\end{frame}
+
+% ===================================================== %
+% Trudne pocz±tki                                       %
+% ===================================================== %
+\begin{frame}\frametitle{Pocz±tki bywaj± trudne}
+   \pgfimage[height=6.0cm]{begin}
+\end{frame}
+
+
+% ===================================================== %
+% Uruchomienie, instalacja                              %
+% ===================================================== %
+\section{Uruchomienie, instalacja}
+\begin{frame}\frametitle{Uruchomienie, instalacja}
+\begin{itemize}
+ \item Instalacja z repozytorium
+ \item Uruchomienie z war'a
+\end{itemize}
+\end{frame}
+
+% ===================================================== %
+% Administracja                                         %
+% ===================================================== %
+\section{Administracja}
+\begin{frame}\frametitle{Administracja vel Manage Jenkins}
+\begin{itemize}
+ \item Security
+ \item Configure system
+ \item ...
+ \item repozytorium konfiguracji
+\end{itemize}
+\end{frame}
+
+
+% ===================================================== %
+% Slave                                                 %
+% ===================================================== %
+\section{Jenkins slaves}
+\begin{frame}\frametitle{Jenkins slaves}
+ 
+\end{frame}
+
+% ===================================================== %
+% Jenkins & groovy                              %
+% ===================================================== %
+\section{Jenkins \& groovy}
+\begin{frame}\frametitle{Jenkins \& groovy \sout{czyli Scriptler}}
+
+\end{frame}
+
+% ===================================================== %
+% Jobs                                                 %
+% ===================================================== %
+\section{Jenkins jobs}
+\begin{frame}\frametitle{Jenkins jobs}
+ \begin{itemize}
+  \item Freestyle project
+  \item Maven project
+  \item Pipeline
+ \end{itemize}
+\end{frame}
+
+% ===================================================== %
+% Views                                                 %
+% ===================================================== %
+\section{Jenkins views}
+\begin{frame}\frametitle{Jenkins views}
+ \begin{itemize}
+  \item Build Pipeline View
+  \item List View
+ \end{itemize}
+\end{frame}
+
+% ===================================================== %
+% Dashboard                                                 %
+% ===================================================== %
+\section{Jenkins dashboard}
+\begin{frame}\frametitle{Jenkins dashboard}
+ \begin{itemize}
+  \item Build Monitor View
+ \end{itemize}
+\end{frame}
+
+% ===================================================== %
+% Calculator plugin                                     %
+% ===================================================== %
+\section{Plugins}
+\begin{frame}\frametitle{Plugins}
+ \begin{itemize}
+  \item Hallo World
+  \item Need Beer
+  \item Calculator
+  \item DirDigger
+ \end{itemize}
+\end{frame}
+
+
+% ===================================================== %
+% Pytania                                               %
+% ===================================================== %
+\section{Pytania}
+\begin{frame}{Pytania}
+\vspace*{10mm}
+\begin{center}
+ \LARGE{Pytania?}
+\end{center}
+\vspace*{30mm}
+\begin{flushright}
+ \LARGE Dziêkuje! 
+\end{flushright}
+\end{frame}
+\end{document}
