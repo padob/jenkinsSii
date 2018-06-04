@@ -1,3 +1,6 @@
+$ mkdir ssh
+$ cd ssh
+
 $ openssl genrsa -out key.pem
 
 ----------------
@@ -27,3 +30,11 @@ $ openssl x509 -req -days 9999 -in csr.pem -signkey key.pem -out cert.pem
 Signature ok
 subject=/C=PL/L=KRK/O=Sii/CN=192.168.1.8/emailAddress=admin@xyz.pl
 Getting Private key
+
+
+Add to command line
+--httpsPort=8443 --httpsCertificate=$jh/ssh/cert.pem --httpsPrivateKey=$jh/ssh/key.pem
+--httpPort=-1
+
+
+https://github.com/hughperkins/howto-jenkins-ssl
