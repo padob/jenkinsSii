@@ -1,0 +1,227 @@
+---- Version 1 ----------------------------------------------------------------------------
+pipeline {
+    agent any
+    tools {
+        maven 'maven'
+        jdk 'java8'
+    }
+    stages {
+        stage('Git'){
+            steps {
+                git branch: 'master', url: 'https://github.com/klimas7/restCounter.git'
+            }
+        }
+
+        stage ('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+            post {
+                success {
+                    archive 'target/*.jar'
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+    }
+}
+
+
+---- Version 2 ----------------------------------------------------------------------------
+properties([parameters([booleanParam(defaultValue: true, description: 'Deploy and run application', name: 'deploy')])])
+pipeline {
+    agent any
+    tools {
+        maven 'maven'
+        jdk 'java8'
+    }
+    stages {
+        stage('Git'){
+            steps {
+                git branch: 'master', url: 'https://github.com/klimas7/restCounter.git'
+            }
+        }
+
+        stage ('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+            post {
+                success {
+                    archive 'target/*.jar'
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+        stage ('Deply') {
+            when {
+                expression { params.deploy }
+            }
+            steps {
+                echo "Deploy application"
+            }
+        }
+    }
+}
+
+----- Version 3 ------------------------------------------------------------------------
+def applicationDir = '/opt/tools/restCounter'
+
+properties([parameters([booleanParam(defaultValue: true, description: 'Deploy and run application', name: 'deploy')])])
+pipeline {
+    agent any
+    tools {
+        maven 'maven'
+        jdk 'java8'
+    }
+    stages {
+        stage('Git'){
+            steps {
+                git branch: 'master', url: 'https://github.com/klimas7/restCounter.git'
+            }
+        }
+
+        stage ('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+            post {
+                success {
+                    archive 'target/*.jar'
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+        stage ('Deply') {
+            when {
+                expression { params.deploy }
+            }
+            steps {
+                echo "Deploy application"
+                sh "mkdir -p ${applicationDir}"
+                sh "cp target/*.jar ${applicationDir}"
+                sh "cp restCounter.sh ${applicationDir}"
+            }
+        }
+    }
+}
+
+----- Version 4 --------------------------------------------------------------------------------
+def applicationDir = '/opt/tools/restCounter'
+
+properties([parameters([booleanParam(defaultValue: true, description: 'Deploy and run application', name: 'deploy')])])
+pipeline {
+    agent any
+    tools {
+        maven 'maven'
+        jdk 'java8'
+    }
+    stages {
+        stage('Git'){
+            steps {
+                git branch: 'master', url: 'https://github.com/klimas7/restCounter.git'
+            }
+        }
+
+        stage ('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+            post {
+                success {
+                    archive 'target/*.jar'
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+        stage ('Deply') {
+            when {
+                expression { params.deploy }
+            }
+            steps {
+                echo "Deploy application"
+                sh "mkdir -p ${applicationDir}"
+                sh "cp target/*.jar ${applicationDir}"
+                sh "cp restCounter.sh ${applicationDir}"
+                dir("${applicationDir}") {
+                    sh "${applicationDir}/restCounter.sh stop"
+                    //sh "${applicationDir}/restCounter.sh start &"
+                    //sleep 50
+                    sh "export JENKINS_NODE_COOKIE=REST_COUNTER; ${applicationDir}/restCounter.sh start &"
+                }
+            }
+        }
+    }
+}
+
+-------- Version 5 ---------------------------------------------------------------------------
+
+def applicationDir = '/opt/tools/restCounter'
+
+properties([
+    parameters([
+        booleanParam(defaultValue: true, description: 'Deploy and run application', name: 'deploy')]),
+    pipelineTriggers([pollSCM('')])
+])
+pipeline {
+    agent any
+    tools {
+        maven 'maven'
+        jdk 'java8'
+    }
+    stages {
+        stage('Git'){
+            steps {
+                git branch: 'master', url: 'https://github.com/klimas7/restCounter.git'
+            }
+        }
+
+        stage ('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+            post {
+                success {
+                    archive 'target/*.jar'
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+        stage ('Deply') {
+            when {
+                expression { params.deploy }
+            }
+            steps {
+                echo "Deploy application"
+                sh "mkdir -p ${applicationDir}"
+                sh "cp target/*.jar ${applicationDir}"
+                sh "cp restCounter.sh ${applicationDir}"
+                dir("${applicationDir}") {
+                    sh "${applicationDir}/restCounter.sh stop"
+                    //sh "${applicationDir}/restCounter.sh start &"
+                    //sleep 50
+                    sh "export JENKINS_NODE_COOKIE=REST_COUNTER; ${applicationDir}/restCounter.sh start &"
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

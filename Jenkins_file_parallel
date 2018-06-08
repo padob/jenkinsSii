@@ -1,0 +1,19 @@
+pipeline {
+    agent none
+    stages {
+        stage('Run Tests') {
+            parallel {
+                stage('Test On Windows') {
+                    steps {
+                        echo "Test on windows"
+                    }
+                }
+                stage('Test On Linux') {
+                    steps {
+                        echo "Test on linux"
+                    }
+                }
+            }
+        }
+    }
+}

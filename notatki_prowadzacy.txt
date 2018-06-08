@@ -54,6 +54,40 @@
 5   Konfiguruj ustawienia bezpieczeństwa
 
 Unix user/group database
+-- Grupy
 
 ====
 Konsola skryptow
+
+====
+Plugins do zainstalowania!
+- Maven Integration
+- Pipeline Maven Integration
+
+====
+Rest and xml api
+
+====
+Remote job invoke
+CLI:
+java -jar jenkins-cli.jar -s http://192.168.1.10:8080/ -auth admin:12345678  help
+java -jar jenkins-cli.jar -s http://192.168.1.10:8080/ -auth admin:12345678 build CLI_Invoke
+java -jar jenkins-cli.jar -s http://192.168.1.10:8080/ -auth admin:12345678 build CLI_Invoke -p param=zxc
+
+
+curl -X POST 'http://admin:89ccd304e8f6e51a2e592b89890c8dc3@192.168.1.10:8080/job/CLI_Invoke/buildWithParameters?param=abc&token=xyzxxx'
+
+curl -X POST 'http://admin:89ccd304e8f6e51a2e592b89890c8dc3@192.168.1.10:8080/job/CLI_Invoke/buildWithParameters?param=abc'
+
+###############
+RestCounter
+
+https://github.com/klimas7/restCounter.git
+target/*.jar
+target/surefire-reports/*.xml
+
+##############
+Conditional BuildStep
+
+##################
+Multibranch Pipeline
