@@ -54,7 +54,7 @@
 5   Konfiguruj ustawienia bezpieczeństwa
 
 Unix user/group database
--- Grupy
+-- Grupy: Role-based Authorization Strategy
 
 ====
 Konsola skryptow
