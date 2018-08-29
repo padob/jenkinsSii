@@ -1,0 +1,30 @@
+properties([parameters([booleanParam(defaultValue: true, description: 'Czy robić deploy', name: 'deploy')])])
+pipeline {
+    agent {
+        label 'Linux_1'
+    }    
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building ...'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Test ...'
+            }
+        }
+        stage('Deploy') {
+            when {
+                expression { params.deploy && currentBuild.currentResult == "SUCCESS" }
+            }
+            steps {
+                echo 'Deploy ...'
+                echo "ssss"
+            }
+            steps {
+                echo 'Coś ...'
+            }
+        }
+    }
+}

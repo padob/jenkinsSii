@@ -1,0 +1,21 @@
+pipeline {
+    agent {
+        label 'Linux_1'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    readFile()
+                }
+            }
+        }
+    }
+}
+
+
+def readFile() {
+    def fileContents = new File('/work/tag.txt').text
+    echo fileContents
+   //def xyz = (sh 'cat /work/tag.txt')
+}

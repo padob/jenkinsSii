@@ -1,18 +1,20 @@
-properties([parameters([string(name: 'TEST', defaultValue: 'test_a')])])
+properties([parameters([string(defaultValue: 'test_a', description: '', name: 'TEST', trim: false)])])
 node {
     stage('First stage') {
-        echo "Hello Sii people"
+        echo "Sii Power People"
     }
-    stage('Environment') {
+    stage("Environments") {
         echo env.PATH
         echo env.BUILD_ID
         echo env.JOB_URL
-        //
     }
-    stage('Params') {
+    stage('Parameters') {
         echo params.TEST
     }
-    stage('currentBuild') {
+    stage('currentBuil') {
         echo currentBuild.displayName
+        echo currentBuild.currentResult
+        //currentBuild.currentResult = FAILURE
+        error 'Cos poszło nie tak'
     }
 }

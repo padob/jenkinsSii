@@ -4,8 +4,10 @@ pipeline {
         stage('Run Tests') {
             parallel {
                 stage('Test On Windows') {
+                    agent any
                     steps {
                         echo "Test on windows"
+                        sleep 30
                     }
                 }
                 stage('Test On Linux') {
@@ -14,6 +16,7 @@ pipeline {
                     }
                     steps {
                         echo "Test on linux"
+                        sleep 30
                     }
                 }
             }
