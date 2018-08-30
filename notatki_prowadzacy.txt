@@ -1,3 +1,4 @@
+Data aktualizacji 27-31.08.2018
 1   Prezentacja
 2   Instalacja via dnf
 2.1 Uruchomienie servisu
@@ -22,10 +23,13 @@
 4.2 Inicjalizacja i domyślne pluginy
 4.3 Omówić katalogi
 4.4 Zarządzaj Jenkinsem
-4.4.1 	Zarządzanie starymi danymi
-4.4.2   Informacje o Jenkinsie
-4.4.3   Informacje o systemie !! Zrzut wątków
-4.4.3   Odczyt statystyk: Zrobić kilka jobów (4 test A) ze schedulerami [Load Statistics]
+4.4.1   Informacje o Jenkinsie
+4.4.2   Informacje o systemie !! Zrzut wątków
+4.4.3 	Zarządzanie starymi danymi
+        https://github.com/klimas7/OldDataPlugin
+
+4.4.4   Odczyt statystyk: Zrobić kilka jobów (4 test A) ze schedulerami [Load Statistics]
+
 4.4.5   System Log
         Plugin
         Poziomy logowania
@@ -46,7 +50,9 @@
            url: file:///work/jenkins/config_repo
 
     -- ThinBackup
-
+        mkdir /work/jenkins_backup
+        0 23 * * *
+        0 * * * *
 
 4.8 Quiet period - wyjaśnić na przykładzie dwóch jobów parent i child
 4.9 SCM checkout retry count - wyjaśnić na podstawie fake repo
@@ -91,3 +97,9 @@ Conditional BuildStep
 
 ##################
 Multibranch Pipeline
+
+########################
+mvn archetype:generate
+909: remote -> io.jenkins.archetypes:hello-world-plugin (Skeleton of a Jenkins plugin with a POM and an example build step.)
+
+artifactId: hello-world-plugin
