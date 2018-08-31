@@ -14,7 +14,7 @@ node {
     stage('currentBuil') {
         echo currentBuild.displayName
         echo currentBuild.currentResult
-        //currentBuild.currentResult = FAILURE
+        //currentBuild.currentResult = 'FAILURE'
         error 'Cos poszło nie tak'
     }
 }

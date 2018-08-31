@@ -1,0 +1,46 @@
+pipeline {
+    agent none
+    stages {
+        stage('Run Tests') {
+            parallel {
+                stage('Test On Windows') {
+                    agent any
+                    steps {
+                        echo "Test on windows"
+                        sleep 2
+                        echo "currentResult: " + currentBuild.currentResult
+                        echo "result: " + currentBuild.result
+                    }
+                }
+                stage('Test On Linux') {
+                    agent {
+                        label "Linux_1"
+                    }
+                    steps {
+                        echo "Test on linux"
+                        sleep 5
+                        echo "currentResult: " + currentBuild.currentResult
+                        echo "result: " + currentBuild.result
+                        error 'xyz'
+                        //currentBuild.result = 'UNSTABLE'
+                    }
+                }
+            }
+        }
+        stage('Deploy') {
+            agent any
+            steps {
+                echo 'Deploy ...'
+                echo "ssss"
+                echo "currentResult: " + currentBuild.currentResult
+                echo "result: " + currentBuild.result
+            }
+            post {
+                always {
+                    echo "currentResult: " + currentBuild.currentResult
+                    echo "result: " + currentBuild.result
+                }
+            }
+        }
+    }
+}
