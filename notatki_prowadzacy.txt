@@ -28,15 +28,15 @@ Data aktualizacji 27-31.08.2018
 4.4.3 	Zarządzanie starymi danymi
         https://github.com/klimas7/OldDataPlugin
 
+4.4.4 Odczytaj ponownie konfigurację z dysku
+        Zmienić liczbę executorów plik config.xml
+
 4.4.4   Odczyt statystyk: Zrobić kilka jobów (4 test A) ze schedulerami [Load Statistics]
 
 4.4.5   System Log
         Plugin
         Poziomy logowania
         Nowy logger
-
-4.5 Odczytaj ponownie konfigurację z dysku
-        Zmienić liczbę executorów plik config.xml
 
 4.6 Zarządzaj wtyczkami
 
@@ -53,9 +53,14 @@ Data aktualizacji 27-31.08.2018
         mkdir /work/jenkins_backup
         0 23 * * *
         0 * * * *
+4.8 Global Tool Configuration
+    - Java
+    - Maven
 
-4.8 Quiet period - wyjaśnić na przykładzie dwóch jobów parent i child
-4.9 SCM checkout retry count - wyjaśnić na podstawie fake repo
+4.9 Configuration
+
+4.9.1 Quiet period - wyjaśnić na przykładzie dwóch jobów parent i child
+4.9.2 SCM checkout retry count - wyjaśnić na podstawie fake repo
 
 5   Konfiguruj ustawienia bezpieczeństwa
 
