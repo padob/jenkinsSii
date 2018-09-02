@@ -69,8 +69,10 @@ pipeline {
 ----- Version 3 ------------------------------------------------------------------------
 def applicationDir = '/opt/tools/restCounter'
 
-properties([parameters([booleanParam(defaultValue: true, description: 'Deploy and run application', name: 'deploy')])])
 pipeline {
+    parameters {
+      booleanParam defaultValue: true, description: 'Deploy and run application', name: 'deploy'
+    }
     agent any
     tools {
         maven 'maven'
@@ -111,8 +113,10 @@ pipeline {
 ----- Version 4 --------------------------------------------------------------------------------
 def applicationDir = '/opt/tools/restCounter'
 
-properties([parameters([booleanParam(defaultValue: true, description: 'Deploy and run application', name: 'deploy')])])
 pipeline {
+    parameters {
+      booleanParam defaultValue: true, description: 'Deploy and run application', name: 'deploy'
+    }
     agent any
     tools {
         maven 'maven'
@@ -147,9 +151,9 @@ pipeline {
                 sh "cp restCounter.sh ${applicationDir}"
                 dir("${applicationDir}") {
                     sh "${applicationDir}/restCounter.sh stop"
-                    //sh "${applicationDir}/restCounter.sh start &"
-                    //sleep 50
-                    sh "export JENKINS_NODE_COOKIE=REST_COUNTER; ${applicationDir}/restCounter.sh start &"
+                    sh "${applicationDir}/restCounter.sh start &"
+                    sleep 50
+                    //sh "export JENKINS_NODE_COOKIE=REST_COUNTER; ${applicationDir}/restCounter.sh start &"
                 }
             }
         }
