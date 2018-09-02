@@ -28,8 +28,10 @@ pipeline {
 
 
 ---- Version 2 ----------------------------------------------------------------------------
-properties([parameters([booleanParam(defaultValue: true, description: 'Deploy and run application', name: 'deploy')])])
 pipeline {
+    parameters {
+      booleanParam defaultValue: true, description: 'Deploy and run application', name: 'deploy'
+    }
     agent any
     tools {
         maven 'maven'
