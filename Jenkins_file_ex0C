@@ -1,5 +1,10 @@
-properties([parameters([booleanParam(defaultValue: true, description: 'Czy robić deploy', name: 'deploy')])])
+//properties([parameters([booleanParam(defaultValue: true, description: 'Czy robić deploy', name: 'deploy')])])
 pipeline {
+    parameters {
+            booleanParam defaultValue: true,
+                         description: 'Czy coś ma się deployować',
+                         name: 'deploy'
+    }
     agent {
         label 'Linux_1'
     }    
