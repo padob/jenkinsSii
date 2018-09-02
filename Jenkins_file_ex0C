@@ -22,9 +22,6 @@ pipeline {
                 echo 'Deploy ...'
                 echo "ssss"
             }
-            steps {
-                echo 'Coś ...'
-            }
         }
     }
 }
