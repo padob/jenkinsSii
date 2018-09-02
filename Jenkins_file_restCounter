@@ -164,12 +164,13 @@ pipeline {
 
 def applicationDir = '/opt/tools/restCounter'
 
-properties([
-    parameters([
-        booleanParam(defaultValue: true, description: 'Deploy and run application', name: 'deploy')]),
-    pipelineTriggers([pollSCM('')])
-])
 pipeline {
+    triggers {
+        pollSCM ''
+    }
+    parameters {
+      booleanParam defaultValue: true, description: 'Deploy and run application', name: 'deploy'
+    }
     agent any
     tools {
         maven 'maven'
