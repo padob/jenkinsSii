@@ -4,7 +4,9 @@ pipeline {
         stage('Run Tests') {
             parallel {
                 stage('Test On Windows') {
-                    agent any
+                    agent {
+                        label 'Windows'
+                    }
                     steps {
                         echo "Test on windows"
                         sleep 30
