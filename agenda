@@ -1,0 +1,40 @@
+ - Start
+    - repository
+    - docker
+    - jar
+    - Jenkins catalog structure
+ - Administration
+    - About Jenkins
+    - System Information
+    - Manage Old Data
+    - Reload Configuration from Disk
+    - Load Statistics
+    - System Log
+    - Manage Plugins
+    - System
+    - Global Tool Configuration
+    - History and Backups
+ - Security
+    - Jenkins users
+    - LDAP
+    - Matrix-based security
+    - Project-based Matrix Authorization Strategy
+ - Manage Nodes
+ - Jenkins CLI and remote access
+ - Groovy - Script console (Jenkins API)
+ - REST API: Json & Xml
+ - Views
+ - Jobs
+    - Freestyle project
+    - Maven project
+    - Pipeline
+    - Multibranch Pipeline
+ - Jenkins integration
+    - git
+    - Bitbucket
+    - Sonar
+    - Email
+    - Stash
+    - Docker
+    - JIRA
+ - Plugin development

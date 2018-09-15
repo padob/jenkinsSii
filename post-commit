@@ -1,1 +1,1 @@
-curl http://localhost:8080/git/notifyCommit?url=file:///work/Learn/
+curl http://localhost:8080/git/notifyCommit?url=file:///work/restCounter
